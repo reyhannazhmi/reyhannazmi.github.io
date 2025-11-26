@@ -1,0 +1,30 @@
+-        if raw_item_code is None or str(raw_item_code).strip() == '' or str(raw_item_code).strip().lower() == 'no item':
+-            # Assign default item_code in the format ITEM-XXX
+-            while True:
+-                default_code = f'ITEM-{default_code_index:03d}'
+-                default_code_index += 1
+-                if default_code not in assigned_codes:
+-                    item_code = default_code
+-                    break
+-            logger.warning(f"Row {idx}: Invalid or missing item_code '{raw_item_code}', assigned default code '{item_code}'.")
+-        else:
+-            # Normalize item_code: strip spaces and convert to uppercase
+-            item_code = str(raw_item_code).strip().upper()
++        # Load item_code as-is from Excel, normalize if not None
++        if raw_item_code is None:
++            item_code = ''
++        else:
++            item_code = str(raw_item_code).strip().upper()
+=======
+        # Validate and assign item_code
+        if raw_item_code is None or str(raw_item_code).strip() == '' or str(raw_item_code).strip().lower() == 'no item':
+            # Assign default item_code in the format ITEM-XXX
+            while True:
+                default_code = f'ITEM-{default_code_index:03d}'
+                default_code_index += 1
+                if default_code not in assigned_codes:
+                    item_code = default_code
+                    break
+            logger.warning(f"Row {idx}: Invalid or missing item_code '{raw_item_code}', assigned default code '{item_code}'.")
+        else:
+            item_code = str(raw_item_code).strip().upper()
